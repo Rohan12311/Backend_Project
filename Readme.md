@@ -10,3 +10,7 @@ app
 app.use
 cookie-parser
 cors
+mongoose-aggregate-paginate-v2
+bcrypt
+bcryptjs
+jwt   json web token
