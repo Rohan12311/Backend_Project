@@ -14,3 +14,9 @@ mongoose-aggregate-paginate-v2
 bcrypt
 bcryptjs
 jwt   json web token
+fs  _  learn unlink
+
+
+
+
+cloudinary.js ka code reuseble hai to store the file in server
