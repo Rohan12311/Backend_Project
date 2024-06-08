@@ -16,7 +16,7 @@ const registerUser = aysncHandler( async (req, res) => {
     // return res 
 
     const {username, email, fullname, password} = req.body
-    console.log("email", email);
+    // console.log("email", email);
     
     if (
         [fullname,email,username, password].some((field) => field?.trim() === "")
@@ -24,7 +24,7 @@ const registerUser = aysncHandler( async (req, res) => {
          throw new ApiError(400, "All fields are requried")
     }
 
-    const existedUser = User.findOne({
+    const existedUser = await User.findOne({
         $or: [{ username },{ email }]
     })
     console.log(existedUser);
@@ -33,10 +33,12 @@ const registerUser = aysncHandler( async (req, res) => {
     }
 
     const avatarLocalPath = req.files?.avatar[0]?.path;
-    const coverImageLocalPath = req.files?.coverImage[0]?.path;
+    // const coverImageLocalPath = req.files?.coverImage[0]?.path;
 
-    console.log("avatarLocalPath",avatarLocalPath);
-    console.log("coverImageLocalPath",coverImageLocalPath);
+    let coverImageLocalPath;
+    if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0) {
+        coverImageLocalPath = req.files.coverImage[0].path
+    }
 
     if (!avatarLocalPath) {
         throw new ApiError(400, "avatar file is required")
