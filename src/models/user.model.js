@@ -63,6 +63,8 @@ userSchema.methods.isPasswordCorrest = async function (password){
     return await bcrypt.compare(password, this.password)
 }
 
+//   jwt is used here
+
 userSchema.methods.genrateAccessToken = function(){
     return jwt.sign(
         {
